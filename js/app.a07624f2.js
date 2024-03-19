@@ -1,2 +1,459 @@
-(function(){var e={9306:function(e,t,n){"use strict";var o=n(144),r=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("main",{staticClass:"relative",attrs:{id:"app"}},[n("router-view")],1)},i=[],a=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},s=[function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("footer",{staticClass:"grid text-white shadow-top mt-auto py-10"},[o("figure",{staticClass:"self-center col-start-2 py-3 sm:py-0"},[o("img",{staticClass:"w-2/5 m-auto sm:m-0",attrs:{src:n(7038),alt:"logo"}})]),o("ul",{staticClass:"flex flex-col gap-y-1 justify-center text-sm py-3 list-disc col-start-2\n      sm:py-0 sm:items-start sm:col-auto"},[o("li",[e._v("Quienes Somos")]),o("li",[e._v("Términos y políticas")]),o("li",[e._v("Política de privacidad")]),o("li",[e._v("Términos de uso")]),o("li",[e._v("Accesibilidad")])]),o("div",{staticClass:"social-media col-start-2 sm:col-auto py-3 sm:py-0"},[o("ul",{staticClass:"flex flex-row justify-center sm:justify-end gap-2 py-2"},[o("li",[o("i",{staticClass:"fab fa-instagram"})]),o("li",[o("i",{staticClass:"fab fa-facebook-f"})]),o("li",[o("i",{staticClass:"fab fa-tiktok"})]),o("li",[o("i",{staticClass:"fab fa-whatsapp"})])]),o("p",[e._v("Lorem ipsum dolor, sit amet consectetur adipisicing elit.")]),o("p",[e._v(" Ab laboriosam iste impedit, maxime sunt itaque, aspernatur excepturi, ")]),o("p",[e._v(" delectus dolores doloremque accusantium vel quibusdam. Laborum, illo maiores sint quam eaque assumenda. ")])])])}],u={name:"Footer"},l=u,c=n(1001),d=(0,c.Z)(l,a,s,!1,null,"c3744284",null),h=d.exports,f=n(23),g={components:{Footer:h},data(){return{showMobileMenu:!1}},created(){this.loginAPI(),f.Z.isClientLogged()||this.$router.push({name:"Login"})},methods:{async loginAPI(){await f.Z.login()}}},p=g,m=(0,c.Z)(p,r,i,!1,null,null,null),I=m.exports,A=n(6665),S=n(7716);o["default"].config.productionTip=!1,o["default"].use(S.ZP),new o["default"]({router:A.Z,render:e=>e(I)}).$mount("#app")},6665:function(e,t,n){"use strict";var o=n(144),r=n(8345);o["default"].use(r.Z);const i=[{path:"/",name:"Admin",component:()=>Promise.all([n.e(161),n.e(481)]).then(n.bind(n,9162))},{path:"/Login",name:"Login",component:()=>n.e(731).then(n.bind(n,8731))},{path:"/dashboard",name:"Dashboard",component:()=>Promise.all([n.e(161),n.e(481)]).then(n.bind(n,9162))},{path:"/admin/:CrudKey",name:"CrudKey",component:()=>Promise.all([n.e(161),n.e(481)]).then(n.bind(n,9162))},{path:"/admin/prices/:CrudKey",name:"AdminPrices",component:()=>Promise.all([n.e(161),n.e(119)]).then(n.bind(n,7119))},{path:"/:catchAll()",redirect:"/"}],a=new r.Z({mode:"history",base:"/",routes:i});t["Z"]=a},23:function(e,t,n){"use strict";n.d(t,{Z:function(){return f}});n(1703);var o=n(9669),r=n.n(o),i=(n(6665),n(6245)),a=n(1354),s=n.n(a),u={api:"http://localhost:3000",api_dotcom:"https://api.iristravelgroup.com",pass:"d00632e42209247297f60b5dff458f88"};const l=u.api_dotcom;let c={baseURL:`${l}`,auth:{username:"api@admin.com",password:"IT_api"}};const d=r().create(c),h={currentUserData:[],async login(){if(!sessionStorage.getItem("token"))try{const{status:e,data:t}=await d.get("/user-api/login");if(200===e)return sessionStorage.setItem("token",t.token),t.token}catch(e){return console.log(e),{success:!1,errors:e.response.data.errors.password[0]}}},async logout(){try{const e=await this.checkLogin("/clients/logout",{auth:"bearer"});sessionStorage.removeItem("token"),200==e.status&&(sessionStorage.setItem("token",e.data.token),h.destroyLocalUserData())}catch(e){console.log("problemas al desloguearse"),console.log(e)}},isClientLogged(){if(sessionStorage.getItem("token")){const e=(0,i.Z)(sessionStorage.getItem("token"));return!!e.client}return!1},async checkLogin(e,t={},n="get"){const o={url:e,method:n},r=sessionStorage.getItem("token");t.data&&(o.data=t.data),t.params&&(o.params=t.params);let i=t.headers?t.headers:{};if(sessionStorage.getItem("token")){if("bearer"==t.auth){let o=null;return o="get"==n?await this.getAxiosToken(r,c.baseURL+e,i):await this.otherAxiosToken(r,c.baseURL+e,t,n),"Unauthorized"==o.error&&this.router.push("/"),o}return d.request(o).catch((e=>e.response))}throw new Error("Something bad happened.")},async checkLoginImage(e,t={},n){const o=sessionStorage.getItem("token");if(sessionStorage.getItem("token")){let r=null;return r=this.otherAxiosToken(o,c.baseURL+e,t,n),r}this.$router.push("/")},async getAxiosToken(e,t,n={}){if(!n)return r().get(t,{headers:{Authorization:"Bearer "+e}}).then((e=>e)).catch((e=>e));let o={...n,Authorization:"Bearer "+e};return r().get(t,{headers:o}).then((e=>e)).catch((e=>e))},async otherAxiosToken(e,t,n,o){try{const i="post"==o?await r().post(t,n,{headers:{Authorization:"Bearer "+e}}):await r().put(t,n,{headers:{Authorization:"Bearer "+e}});return i}catch(i){return i}},getClientToken(){return this.decodeToken(sessionStorage.getItem("token"))},decodeToken(e){return(0,i.Z)(e)},createLocalUserData(){const e=this.getClientToken().client;localStorage.setItem("id",e.id),localStorage.setItem("user",e.name),localStorage.setItem("roles",e.roles),localStorage.setItem("email",e.email)},destroyLocalUserData(){localStorage.clear()},validateRole(e,t=!1){if(!this.isClientLogged())return this.destroyLocalUserData(),!1;{const n=localStorage.getItem("roles");if(!t&&n.includes("ROLE_SuperAdmin"))return!0;if(void 0!=e)for(let t of e)if(n.includes(t))return!0}return!1},encryptPass(e){this.getClientToken();const t=sessionStorage.getItem("token").slice(-10);let n=null,o=s().lib.WordArray.random(16);return t&&(n=s().AES.encrypt(e,t,o)),n.toString()}};var f=h},7038:function(e){"use strict";e.exports="data:image/png;base64,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"},2480:function(){}},t={};function n(o){var r=t[o];if(void 0!==r)return r.exports;var i=t[o]={id:o,loaded:!1,exports:{}};return e[o].call(i.exports,i,i.exports,n),i.loaded=!0,i.exports}n.m=e,function(){var e=[];n.O=function(t,o,r,i){if(!o){var a=1/0;for(c=0;c<e.length;c++){o=e[c][0],r=e[c][1],i=e[c][2];for(var s=!0,u=0;u<o.length;u++)(!1&i||a>=i)&&Object.keys(n.O).every((function(e){return n.O[e](o[u])}))?o.splice(u--,1):(s=!1,i<a&&(a=i));if(s){e.splice(c--,1);var l=r();void 0!==l&&(t=l)}}return t}i=i||0;for(var c=e.length;c>0&&e[c-1][2]>i;c--)e[c]=e[c-1];e[c]=[o,r,i]}}(),function(){n.n=function(e){var t=e&&e.__esModule?function(){return e["default"]}:function(){return e};return n.d(t,{a:t}),t}}(),function(){n.d=function(e,t){for(var o in t)n.o(t,o)&&!n.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})}}(),function(){n.f={},n.e=function(e){return Promise.all(Object.keys(n.f).reduce((function(t,o){return n.f[o](e,t),t}),[]))}}(),function(){n.u=function(e){return"js/"+e+"."+{119:"4c7ede17",161:"a02ed545",481:"972dd432",731:"871c6197"}[e]+".js"}}(),function(){n.miniCssF=function(e){return"css/"+e+"."+{161:"591a20cd",481:"7df91c2f",731:"de09da26"}[e]+".css"}}(),function(){n.g=function(){if("object"===typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"===typeof window)return window}}()}(),function(){n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)}}(),function(){var e={},t="iristravel:";n.l=function(o,r,i,a){if(e[o])e[o].push(r);else{var s,u;if(void 0!==i)for(var l=document.getElementsByTagName("script"),c=0;c<l.length;c++){var d=l[c];if(d.getAttribute("src")==o||d.getAttribute("data-webpack")==t+i){s=d;break}}s||(u=!0,s=document.createElement("script"),s.charset="utf-8",s.timeout=120,n.nc&&s.setAttribute("nonce",n.nc),s.setAttribute("data-webpack",t+i),s.src=o),e[o]=[r];var h=function(t,n){s.onerror=s.onload=null,clearTimeout(f);var r=e[o];if(delete e[o],s.parentNode&&s.parentNode.removeChild(s),r&&r.forEach((function(e){return e(n)})),t)return t(n)},f=setTimeout(h.bind(null,void 0,{type:"timeout",target:s}),12e4);s.onerror=h.bind(null,s.onerror),s.onload=h.bind(null,s.onload),u&&document.head.appendChild(s)}}}(),function(){n.r=function(e){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}}(),function(){n.nmd=function(e){return e.paths=[],e.children||(e.children=[]),e}}(),function(){n.p="/"}(),function(){var e=function(e,t,n,o){var r=document.createElement("link");r.rel="stylesheet",r.type="text/css";var i=function(i){if(r.onerror=r.onload=null,"load"===i.type)n();else{var a=i&&("load"===i.type?"missing":i.type),s=i&&i.target&&i.target.href||t,u=new Error("Loading CSS chunk "+e+" failed.\n("+s+")");u.code="CSS_CHUNK_LOAD_FAILED",u.type=a,u.request=s,r.parentNode.removeChild(r),o(u)}};return r.onerror=r.onload=i,r.href=t,document.head.appendChild(r),r},t=function(e,t){for(var n=document.getElementsByTagName("link"),o=0;o<n.length;o++){var r=n[o],i=r.getAttribute("data-href")||r.getAttribute("href");if("stylesheet"===r.rel&&(i===e||i===t))return r}var a=document.getElementsByTagName("style");for(o=0;o<a.length;o++){r=a[o],i=r.getAttribute("data-href");if(i===e||i===t)return r}},o=function(o){return new Promise((function(r,i){var a=n.miniCssF(o),s=n.p+a;if(t(a,s))return r();e(o,s,r,i)}))},r={143:0};n.f.miniCss=function(e,t){var n={161:1,481:1,731:1};r[e]?t.push(r[e]):0!==r[e]&&n[e]&&t.push(r[e]=o(e).then((function(){r[e]=0}),(function(t){throw delete r[e],t})))}}(),function(){var e={143:0};n.f.j=function(t,o){var r=n.o(e,t)?e[t]:void 0;if(0!==r)if(r)o.push(r[2]);else{var i=new Promise((function(n,o){r=e[t]=[n,o]}));o.push(r[2]=i);var a=n.p+n.u(t),s=new Error,u=function(o){if(n.o(e,t)&&(r=e[t],0!==r&&(e[t]=void 0),r)){var i=o&&("load"===o.type?"missing":o.type),a=o&&o.target&&o.target.src;s.message="Loading chunk "+t+" failed.\n("+i+": "+a+")",s.name="ChunkLoadError",s.type=i,s.request=a,r[1](s)}};n.l(a,u,"chunk-"+t,t)}},n.O.j=function(t){return 0===e[t]};var t=function(t,o){var r,i,a=o[0],s=o[1],u=o[2],l=0;if(a.some((function(t){return 0!==e[t]}))){for(r in s)n.o(s,r)&&(n.m[r]=s[r]);if(u)var c=u(n)}for(t&&t(o);l<a.length;l++)i=a[l],n.o(e,i)&&e[i]&&e[i][0](),e[i]=0;return n.O(c)},o=self["webpackChunkiristravel"]=self["webpackChunkiristravel"]||[];o.forEach(t.bind(null,0)),o.push=t.bind(null,o.push.bind(o))}();var o=n.O(void 0,[998],(function(){return n(9306)}));o=n.O(o)})();
-//# sourceMappingURL=app.a07624f2.js.map
+/* GObject - GLib Type, Object, Parameter and Signal Library
+ * Copyright (C) 1997-1999, 2000-2001 Tim Janik and Red Hat, Inc.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ *
+ * gparam.h: GParamSpec base class implementation
+ */
+#ifndef __G_PARAM_H__
+#define __G_PARAM_H__
+
+#if !defined (__GLIB_GOBJECT_H_INSIDE__) && !defined (GOBJECT_COMPILATION)
+#error "Only <glib-object.h> can be included directly."
+#endif
+
+#include	<gobject/gvalue.h>
+
+G_BEGIN_DECLS
+
+/* --- standard type macros --- */
+/**
+ * G_TYPE_IS_PARAM:
+ * @type: a #GType ID
+ * 
+ * Checks whether @type "is a" %G_TYPE_PARAM.
+ */
+#define G_TYPE_IS_PARAM(type)		(G_TYPE_FUNDAMENTAL (type) == G_TYPE_PARAM)
+/**
+ * G_PARAM_SPEC:
+ * @pspec: a valid #GParamSpec
+ * 
+ * Casts a derived #GParamSpec object (e.g. of type #GParamSpecInt) into
+ * a #GParamSpec object.
+ */
+#define G_PARAM_SPEC(pspec)		(G_TYPE_CHECK_INSTANCE_CAST ((pspec), G_TYPE_PARAM, GParamSpec))
+/**
+ * G_IS_PARAM_SPEC:
+ * @pspec: a #GParamSpec
+ * 
+ * Checks whether @pspec "is a" valid #GParamSpec structure of type %G_TYPE_PARAM
+ * or derived.
+ */
+#if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_42
+#define G_IS_PARAM_SPEC(pspec)		(G_TYPE_CHECK_INSTANCE_FUNDAMENTAL_TYPE ((pspec), G_TYPE_PARAM))
+#else
+#define G_IS_PARAM_SPEC(pspec)		(G_TYPE_CHECK_INSTANCE_TYPE ((pspec), G_TYPE_PARAM))
+#endif
+/**
+ * G_PARAM_SPEC_CLASS:
+ * @pclass: a valid #GParamSpecClass
+ * 
+ * Casts a derived #GParamSpecClass structure into a #GParamSpecClass structure.
+ */
+#define G_PARAM_SPEC_CLASS(pclass)      (G_TYPE_CHECK_CLASS_CAST ((pclass), G_TYPE_PARAM, GParamSpecClass))
+/**
+ * G_IS_PARAM_SPEC_CLASS:
+ * @pclass: a #GParamSpecClass
+ * 
+ * Checks whether @pclass "is a" valid #GParamSpecClass structure of type 
+ * %G_TYPE_PARAM or derived.
+ */
+#define G_IS_PARAM_SPEC_CLASS(pclass)   (G_TYPE_CHECK_CLASS_TYPE ((pclass), G_TYPE_PARAM))
+/**
+ * G_PARAM_SPEC_GET_CLASS:
+ * @pspec: a valid #GParamSpec
+ * 
+ * Retrieves the #GParamSpecClass of a #GParamSpec.
+ */
+#define G_PARAM_SPEC_GET_CLASS(pspec)	(G_TYPE_INSTANCE_GET_CLASS ((pspec), G_TYPE_PARAM, GParamSpecClass))
+
+
+/* --- convenience macros --- */
+/**
+ * G_PARAM_SPEC_TYPE:
+ * @pspec: a valid #GParamSpec
+ * 
+ * Retrieves the #GType of this @pspec.
+ */
+#define G_PARAM_SPEC_TYPE(pspec)	(G_TYPE_FROM_INSTANCE (pspec))
+/**
+ * G_PARAM_SPEC_TYPE_NAME:
+ * @pspec: a valid #GParamSpec
+ * 
+ * Retrieves the #GType name of this @pspec.
+ */
+#define G_PARAM_SPEC_TYPE_NAME(pspec)	(g_type_name (G_PARAM_SPEC_TYPE (pspec)))
+/**
+ * G_PARAM_SPEC_VALUE_TYPE:
+ * @pspec: a valid #GParamSpec
+ * 
+ * Retrieves the #GType to initialize a #GValue for this parameter.
+ */
+#define	G_PARAM_SPEC_VALUE_TYPE(pspec)	(G_PARAM_SPEC (pspec)->value_type)
+/**
+ * G_VALUE_HOLDS_PARAM:
+ * @value: a valid #GValue structure
+ * 
+ * Checks whether the given #GValue can hold values derived from type %G_TYPE_PARAM.
+ * 
+ * Returns: %TRUE on success.
+ */
+#define G_VALUE_HOLDS_PARAM(value)	(G_TYPE_CHECK_VALUE_TYPE ((value), G_TYPE_PARAM))
+       
+
+/* --- flags --- */
+/**
+ * GParamFlags:
+ * @G_PARAM_READABLE: the parameter is readable
+ * @G_PARAM_WRITABLE: the parameter is writable
+ * @G_PARAM_READWRITE: alias for %G_PARAM_READABLE | %G_PARAM_WRITABLE
+ * @G_PARAM_CONSTRUCT: the parameter will be set upon object construction
+ * @G_PARAM_CONSTRUCT_ONLY: the parameter can only be set upon object construction
+ * @G_PARAM_LAX_VALIDATION: upon parameter conversion (see g_param_value_convert())
+ *  strict validation is not required
+ * @G_PARAM_STATIC_NAME: the string used as name when constructing the 
+ *  parameter is guaranteed to remain valid and
+ *  unmodified for the lifetime of the parameter. 
+ *  Since 2.8
+ * @G_PARAM_STATIC_NICK: the string used as nick when constructing the
+ *  parameter is guaranteed to remain valid and
+ *  unmmodified for the lifetime of the parameter.
+ *  Since 2.8
+ * @G_PARAM_STATIC_BLURB: the string used as blurb when constructing the 
+ *  parameter is guaranteed to remain valid and 
+ *  unmodified for the lifetime of the parameter. 
+ *  Since 2.8
+ * @G_PARAM_EXPLICIT_NOTIFY: calls to g_object_set_property() for this
+ *   property will not automatically result in a "notify" signal being
+ *   emitted: the implementation must call g_object_notify() themselves
+ *   in case the property actually changes.  Since: 2.42.
+ * @G_PARAM_PRIVATE: internal
+ * @G_PARAM_DEPRECATED: the parameter is deprecated and will be removed
+ *  in a future version. A warning will be generated if it is used
+ *  while running with G_ENABLE_DIAGNOSTIC=1.
+ *  Since 2.26
+ * 
+ * Through the #GParamFlags flag values, certain aspects of parameters
+ * can be configured.
+ *
+ * See also: %G_PARAM_STATIC_STRINGS
+ */
+typedef enum
+{
+  G_PARAM_READABLE            = 1 << 0,
+  G_PARAM_WRITABLE            = 1 << 1,
+  G_PARAM_READWRITE           = (G_PARAM_READABLE | G_PARAM_WRITABLE),
+  G_PARAM_CONSTRUCT	      = 1 << 2,
+  G_PARAM_CONSTRUCT_ONLY      = 1 << 3,
+  G_PARAM_LAX_VALIDATION      = 1 << 4,
+  G_PARAM_STATIC_NAME	      = 1 << 5,
+  G_PARAM_PRIVATE GLIB_DEPRECATED_ENUMERATOR_IN_2_26 = G_PARAM_STATIC_NAME,
+  G_PARAM_STATIC_NICK	      = 1 << 6,
+  G_PARAM_STATIC_BLURB	      = 1 << 7,
+  /* User defined flags go here */
+  G_PARAM_EXPLICIT_NOTIFY     = 1 << 30,
+  /* Avoid warning with -Wpedantic for gcc6 */
+  G_PARAM_DEPRECATED          = (gint)(1u << 31)
+} GParamFlags;
+
+/**
+ * G_PARAM_STATIC_STRINGS:
+ * 
+ * #GParamFlags value alias for %G_PARAM_STATIC_NAME | %G_PARAM_STATIC_NICK | %G_PARAM_STATIC_BLURB.
+ * 
+ * Since 2.13.0
+ */
+#define	G_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
+/* bits in the range 0xffffff00 are reserved for 3rd party usage */
+/**
+ * G_PARAM_MASK:
+ * 
+ * Mask containing the bits of #GParamSpec.flags which are reserved for GLib.
+ */
+#define	G_PARAM_MASK		(0x000000ff)
+/**
+ * G_PARAM_USER_SHIFT:
+ * 
+ * Minimum shift count to be used for user defined flags, to be stored in
+ * #GParamSpec.flags. The maximum allowed is 10.
+ */
+#define	G_PARAM_USER_SHIFT	(8)
+
+/* --- typedefs & structures --- */
+typedef struct _GParamSpec      GParamSpec;
+typedef struct _GParamSpecClass GParamSpecClass;
+typedef struct _GParameter	GParameter GLIB_DEPRECATED_TYPE_IN_2_54;
+typedef struct _GParamSpecPool  GParamSpecPool;
+/**
+ * GParamSpec: (ref-func g_param_spec_ref_sink) (unref-func g_param_spec_unref) (set-value-func g_value_set_param) (get-value-func g_value_get_param)
+ * @g_type_instance: private #GTypeInstance portion
+ * @name: name of this parameter: always an interned string
+ * @flags: #GParamFlags flags for this parameter
+ * @value_type: the #GValue type for this parameter
+ * @owner_type: #GType type that uses (introduces) this parameter
+ * 
+ * All other fields of the GParamSpec struct are private and
+ * should not be used directly.
+ */
+struct _GParamSpec
+{
+  GTypeInstance  g_type_instance;
+
+  const gchar   *name;          /* interned string */
+  GParamFlags    flags;
+  GType		 value_type;
+  GType		 owner_type;	/* class or interface using this property */
+
+  /*< private >*/
+  gchar         *_nick;
+  gchar         *_blurb;
+  GData		*qdata;
+  guint          ref_count;
+  guint		 param_id;	/* sort-criteria */
+};
+/**
+ * GParamSpecClass:
+ * @g_type_class: the parent class
+ * @value_type: the #GValue type for this parameter
+ * @finalize: The instance finalization function (optional), should chain 
+ *  up to the finalize method of the parent class.
+ * @value_set_default: Resets a @value to the default value for this type
+ *  (recommended, the default is g_value_reset()), see 
+ *  g_param_value_set_default().
+ * @value_validate: Ensures that the contents of @value comply with the 
+ *  specifications set out by this type (optional), see 
+ *  g_param_value_validate().
+ * @values_cmp: Compares @value1 with @value2 according to this type
+ *  (recommended, the default is memcmp()), see g_param_values_cmp().
+ * 
+ * The class structure for the GParamSpec type.
+ * Normally, GParamSpec classes are filled by
+ * g_param_type_register_static().
+ */
+struct _GParamSpecClass
+{
+  GTypeClass      g_type_class;
+
+  GType		  value_type;
+
+  void	        (*finalize)		(GParamSpec   *pspec);
+
+  /* GParam methods */
+  void          (*value_set_default)    (GParamSpec   *pspec,
+					 GValue       *value);
+  gboolean      (*value_validate)       (GParamSpec   *pspec,
+					 GValue       *value);
+  gint          (*values_cmp)           (GParamSpec   *pspec,
+					 const GValue *value1,
+					 const GValue *value2);
+  /*< private >*/
+  gpointer	  dummy[4];
+};
+/**
+ * GParameter:
+ * @name: the parameter name
+ * @value: the parameter value
+ * 
+ * The GParameter struct is an auxiliary structure used
+ * to hand parameter name/value pairs to g_object_newv().
+ *
+ * Deprecated: 2.54: This type is not introspectable.
+ */
+struct _GParameter /* auxiliary structure for _setv() variants */
+{
+  const gchar *name;
+  GValue       value;
+} GLIB_DEPRECATED_TYPE_IN_2_54;
+
+
+/* --- prototypes --- */
+GLIB_AVAILABLE_IN_ALL
+GParamSpec*	g_param_spec_ref		(GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+void		g_param_spec_unref		(GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+void		g_param_spec_sink		(GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+GParamSpec*	g_param_spec_ref_sink   	(GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+gpointer        g_param_spec_get_qdata		(GParamSpec    *pspec,
+						 GQuark         quark);
+GLIB_AVAILABLE_IN_ALL
+void            g_param_spec_set_qdata		(GParamSpec    *pspec,
+						 GQuark         quark,
+						 gpointer       data);
+GLIB_AVAILABLE_IN_ALL
+void            g_param_spec_set_qdata_full	(GParamSpec    *pspec,
+						 GQuark         quark,
+						 gpointer       data,
+						 GDestroyNotify destroy);
+GLIB_AVAILABLE_IN_ALL
+gpointer        g_param_spec_steal_qdata	(GParamSpec    *pspec,
+						 GQuark         quark);
+GLIB_AVAILABLE_IN_ALL
+GParamSpec*     g_param_spec_get_redirect_target (GParamSpec   *pspec);
+
+GLIB_AVAILABLE_IN_ALL
+void		g_param_value_set_default	(GParamSpec    *pspec,
+						 GValue	       *value);
+GLIB_AVAILABLE_IN_ALL
+gboolean	g_param_value_defaults		(GParamSpec    *pspec,
+						 const GValue  *value);
+GLIB_AVAILABLE_IN_ALL
+gboolean	g_param_value_validate		(GParamSpec    *pspec,
+						 GValue	       *value);
+GLIB_AVAILABLE_IN_ALL
+gboolean	g_param_value_convert		(GParamSpec    *pspec,
+						 const GValue  *src_value,
+						 GValue	       *dest_value,
+						 gboolean	strict_validation);
+GLIB_AVAILABLE_IN_ALL
+gint		g_param_values_cmp		(GParamSpec    *pspec,
+						 const GValue  *value1,
+						 const GValue  *value2);
+GLIB_AVAILABLE_IN_ALL
+const gchar *   g_param_spec_get_name           (GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+const gchar *   g_param_spec_get_nick           (GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+const gchar *   g_param_spec_get_blurb          (GParamSpec    *pspec);
+GLIB_AVAILABLE_IN_ALL
+void            g_value_set_param               (GValue	       *value,
+						 GParamSpec    *param);
+GLIB_AVAILABLE_IN_ALL
+GParamSpec*     g_value_get_param               (const GValue  *value);
+GLIB_AVAILABLE_IN_ALL
+GParamSpec*     g_value_dup_param               (const GValue  *value);
+
+
+GLIB_AVAILABLE_IN_ALL
+void           g_value_take_param               (GValue        *value,
+					         GParamSpec    *param);
+GLIB_DEPRECATED_FOR(g_value_take_param)
+void           g_value_set_param_take_ownership (GValue        *value,
+                                                 GParamSpec    *param);
+GLIB_AVAILABLE_IN_2_36
+const GValue *  g_param_spec_get_default_value  (GParamSpec    *pspec);
+
+GLIB_AVAILABLE_IN_2_46
+GQuark          g_param_spec_get_name_quark     (GParamSpec    *pspec);
+
+/* --- convenience functions --- */
+typedef struct _GParamSpecTypeInfo GParamSpecTypeInfo;
+/**
+ * GParamSpecTypeInfo:
+ * @instance_size: Size of the instance (object) structure.
+ * @n_preallocs: Prior to GLib 2.10, it specified the number of pre-allocated (cached) instances to reserve memory for (0 indicates no caching). Since GLib 2.10, it is ignored, since instances are allocated with the [slice allocator][glib-Memory-Slices] now.
+ * @instance_init: Location of the instance initialization function (optional).
+ * @value_type: The #GType of values conforming to this #GParamSpec
+ * @finalize: The instance finalization function (optional).
+ * @value_set_default: Resets a @value to the default value for @pspec 
+ *  (recommended, the default is g_value_reset()), see 
+ *  g_param_value_set_default().
+ * @value_validate: Ensures that the contents of @value comply with the 
+ *  specifications set out by @pspec (optional), see 
+ *  g_param_value_validate().
+ * @values_cmp: Compares @value1 with @value2 according to @pspec 
+ *  (recommended, the default is memcmp()), see g_param_values_cmp().
+ * 
+ * This structure is used to provide the type system with the information
+ * required to initialize and destruct (finalize) a parameter's class and
+ * instances thereof.
+ *
+ * The initialized structure is passed to the g_param_type_register_static() 
+ * The type system will perform a deep copy of this structure, so its memory 
+ * does not need to be persistent across invocation of 
+ * g_param_type_register_static().
+ */
+struct _GParamSpecTypeInfo
+{
+  /* type system portion */
+  guint16         instance_size;                               /* obligatory */
+  guint16         n_preallocs;                                 /* optional */
+  void		(*instance_init)	(GParamSpec   *pspec); /* optional */
+
+  /* class portion */
+  GType           value_type;				       /* obligatory */
+  void          (*finalize)             (GParamSpec   *pspec); /* optional */
+  void          (*value_set_default)    (GParamSpec   *pspec,  /* recommended */
+					 GValue       *value);
+  gboolean      (*value_validate)       (GParamSpec   *pspec,  /* optional */
+					 GValue       *value);
+  gint          (*values_cmp)           (GParamSpec   *pspec,  /* recommended */
+					 const GValue *value1,
+					 const GValue *value2);
+};
+GLIB_AVAILABLE_IN_ALL
+GType	g_param_type_register_static	(const gchar		  *name,
+					 const GParamSpecTypeInfo *pspec_info);
+
+GLIB_AVAILABLE_IN_2_66
+gboolean g_param_spec_is_valid_name    (const gchar              *name);
+
+/* For registering builting types */
+GType  _g_param_type_register_static_constant (const gchar              *name,
+					       const GParamSpecTypeInfo *pspec_info,
+					       GType                     opt_type);
+
+
+/* --- protected --- */
+GLIB_AVAILABLE_IN_ALL
+gpointer	g_param_spec_internal		(GType	        param_type,
+						 const gchar   *name,
+						 const gchar   *nick,
+						 const gchar   *blurb,
+						 GParamFlags    flags);
+GLIB_AVAILABLE_IN_ALL
+GParamSpecPool* g_param_spec_pool_new		(gboolean	type_prefixing);
+GLIB_AVAILABLE_IN_ALL
+void		g_param_spec_pool_insert	(GParamSpecPool	*pool,
+						 GParamSpec	*pspec,
+						 GType		 owner_type);
+GLIB_AVAILABLE_IN_ALL
+void		g_param_spec_pool_remove	(GParamSpecPool	*pool,
+						 GParamSpec	*pspec);
+GLIB_AVAILABLE_IN_ALL
+GParamSpec*	g_param_spec_pool_lookup	(GParamSpecPool	*pool,
+						 const gchar	*param_name,
+						 GType		 owner_type,
+						 gboolean	 walk_ancestors);
+GLIB_AVAILABLE_IN_ALL
+GList*		g_param_spec_pool_list_owned	(GParamSpecPool	*pool,
+						 GType		 owner_type);
+GLIB_AVAILABLE_IN_ALL
+GParamSpec**	g_param_spec_pool_list		(GParamSpecPool	*pool,
+						 GType		 owner_type,
+						 guint		*n_pspecs_p);
+
+
+/* contracts:
+ *
+ * gboolean value_validate (GParamSpec *pspec,
+ *                          GValue     *value):
+ *	modify value contents in the least destructive way, so
+ *	that it complies with pspec's requirements (i.e.
+ *	according to minimum/maximum ranges etc...). return
+ *	whether modification was necessary.
+ *
+ * gint values_cmp (GParamSpec   *pspec,
+ *                  const GValue *value1,
+ *                  const GValue *value2):
+ *	return value1 - value2, i.e. (-1) if value1 < value2,
+ *	(+1) if value1 > value2, and (0) otherwise (equality)
+ */
+
+G_END_DECLS
+
+#endif /* __G_PARAM_H__ */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

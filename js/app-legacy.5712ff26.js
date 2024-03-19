@@ -1,2 +1,592 @@
-(function(){var e={5024:function(e,t,n){"use strict";n(6992),n(8674),n(9601),n(7727);var r=n(144),o=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("main",{staticClass:"relative",attrs:{id:"app"}},[n("router-view")],1)},i=[],a=n(6198),s=(n(5666),function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)}),u=[function(){var e=this,t=e.$createElement,r=e._self._c||t;return r("footer",{staticClass:"grid text-white shadow-top mt-auto py-10"},[r("figure",{staticClass:"self-center col-start-2 py-3 sm:py-0"},[r("img",{staticClass:"w-2/5 m-auto sm:m-0",attrs:{src:n(7038),alt:"logo"}})]),r("ul",{staticClass:"flex flex-col gap-y-1 justify-center text-sm py-3 list-disc col-start-2\n      sm:py-0 sm:items-start sm:col-auto"},[r("li",[e._v("Quienes Somos")]),r("li",[e._v("Términos y políticas")]),r("li",[e._v("Política de privacidad")]),r("li",[e._v("Términos de uso")]),r("li",[e._v("Accesibilidad")])]),r("div",{staticClass:"social-media col-start-2 sm:col-auto py-3 sm:py-0"},[r("ul",{staticClass:"flex flex-row justify-center sm:justify-end gap-2 py-2"},[r("li",[r("i",{staticClass:"fab fa-instagram"})]),r("li",[r("i",{staticClass:"fab fa-facebook-f"})]),r("li",[r("i",{staticClass:"fab fa-tiktok"})]),r("li",[r("i",{staticClass:"fab fa-whatsapp"})])]),r("p",[e._v("Lorem ipsum dolor, sit amet consectetur adipisicing elit.")]),r("p",[e._v(" Ab laboriosam iste impedit, maxime sunt itaque, aspernatur excepturi, ")]),r("p",[e._v(" delectus dolores doloremque accusantium vel quibusdam. Laborum, illo maiores sint quam eaque assumenda. ")])])])}],c={name:"Footer"},l=c,h=n(1001),d=(0,h.Z)(l,s,u,!1,null,"c3744284",null),f=d.exports,p=n(23),g={components:{Footer:f},data:function(){return{showMobileMenu:!1}},created:function(){this.loginAPI(),p.Z.isClientLogged()||this.$router.push({name:"Login"})},methods:{loginAPI:function(){return(0,a.Z)(regeneratorRuntime.mark((function e(){return regeneratorRuntime.wrap((function(e){while(1)switch(e.prev=e.next){case 0:return e.next=2,p.Z.login();case 2:case"end":return e.stop()}}),e)})))()}}},m=g,v=(0,h.Z)(m,o,i,!1,null,null,null),I=v.exports,k=(n(1539),n(8783),n(3948),n(8345));r["default"].use(k.Z);var A=[{path:"/",name:"Admin",component:function(){return Promise.all([n.e(961),n.e(481)]).then(n.bind(n,9162))}},{path:"/Login",name:"Login",component:function(){return n.e(154).then(n.bind(n,7154))}},{path:"/dashboard",name:"Dashboard",component:function(){return Promise.all([n.e(961),n.e(481)]).then(n.bind(n,9162))}},{path:"/admin/:CrudKey",name:"CrudKey",component:function(){return Promise.all([n.e(961),n.e(481)]).then(n.bind(n,9162))}},{path:"/admin/prices/:CrudKey",name:"AdminPrices",component:function(){return Promise.all([n.e(961),n.e(119)]).then(n.bind(n,7119))}},{path:"/:catchAll()",redirect:"/"}],S=new k.Z({mode:"history",base:"/",routes:A}),b=S,C=n(7716);r["default"].config.productionTip=!1,r["default"].use(C.ZP),new r["default"]({router:b,render:function(e){return e(I)}}).$mount("#app")},23:function(e,t,n){"use strict";n.d(t,{Z:function(){return m}});var r=n(7965),o=n(3019),i=n(6198),a=(n(1703),n(8309),n(6699),n(2023),n(7042),n(1539),n(9714),n(5666),n(9669)),s=n.n(a),u=n(6245),c=n(1354),l=n.n(c),h={api:"http://localhost:3000",api_dotcom:"https://api.iristravelgroup.com",pass:"d00632e42209247297f60b5dff458f88"},d=h.api_dotcom,f={baseURL:"".concat(d),auth:{username:"api@admin.com",password:"IT_api"}},p=s().create(f),g={currentUserData:[],login:function(){return(0,i.Z)(regeneratorRuntime.mark((function e(){var t,n,r;return regeneratorRuntime.wrap((function(e){while(1)switch(e.prev=e.next){case 0:if(sessionStorage.getItem("token")){e.next=16;break}return e.prev=1,e.next=4,p.get("/user-api/login");case 4:if(t=e.sent,n=t.status,r=t.data,200!==n){e.next=10;break}return sessionStorage.setItem("token",r.token),e.abrupt("return",r.token);case 10:e.next=16;break;case 12:return e.prev=12,e.t0=e["catch"](1),console.log(e.t0),e.abrupt("return",{success:!1,errors:e.t0.response.data.errors.password[0]});case 16:case"end":return e.stop()}}),e,null,[[1,12]])})))()},logout:function(){var e=this;return(0,i.Z)(regeneratorRuntime.mark((function t(){var n;return regeneratorRuntime.wrap((function(t){while(1)switch(t.prev=t.next){case 0:return t.prev=0,t.next=3,e.checkLogin("/clients/logout",{auth:"bearer"});case 3:n=t.sent,sessionStorage.removeItem("token"),200==n.status&&(sessionStorage.setItem("token",n.data.token),g.destroyLocalUserData()),t.next=12;break;case 8:t.prev=8,t.t0=t["catch"](0),console.log("problemas al desloguearse"),console.log(t.t0);case 12:case"end":return t.stop()}}),t,null,[[0,8]])})))()},isClientLogged:function(){if(sessionStorage.getItem("token")){var e=(0,u.Z)(sessionStorage.getItem("token"));return!!e.client}return!1},checkLogin:function(e){var t=arguments,n=this;return(0,i.Z)(regeneratorRuntime.mark((function r(){var o,i,a,s,u,c;return regeneratorRuntime.wrap((function(r){while(1)switch(r.prev=r.next){case 0:if(o=t.length>1&&void 0!==t[1]?t[1]:{},i=t.length>2&&void 0!==t[2]?t[2]:"get",a={url:e,method:i},s=sessionStorage.getItem("token"),o.data&&(a.data=o.data),o.params&&(a.params=o.params),u=o.headers?o.headers:{},!sessionStorage.getItem("token")){r.next=23;break}if("bearer"!=o.auth){r.next=20;break}if(c=null,"get"!=i){r.next=15;break}return r.next=12,n.getAxiosToken(s,f.baseURL+e,u);case 12:c=r.sent,r.next=18;break;case 15:return r.next=17,n.otherAxiosToken(s,f.baseURL+e,o,i);case 17:c=r.sent;case 18:return"Unauthorized"==c.error&&n.router.push("/"),r.abrupt("return",c);case 20:return r.abrupt("return",p.request(a).catch((function(e){return e.response})));case 23:throw new Error("Something bad happened.");case 24:case"end":return r.stop()}}),r)})))()},checkLoginImage:function(e){var t=arguments,n=this;return(0,i.Z)(regeneratorRuntime.mark((function r(){var o,i,a,s;return regeneratorRuntime.wrap((function(r){while(1)switch(r.prev=r.next){case 0:if(o=t.length>1&&void 0!==t[1]?t[1]:{},i=t.length>2?t[2]:void 0,a=sessionStorage.getItem("token"),!sessionStorage.getItem("token")){r.next=7;break}return s=null,s=n.otherAxiosToken(a,f.baseURL+e,o,i),r.abrupt("return",s);case 7:n.$router.push("/");case 8:case"end":return r.stop()}}),r)})))()},getAxiosToken:function(e,t){var n=arguments;return(0,i.Z)(regeneratorRuntime.mark((function r(){var i,a;return regeneratorRuntime.wrap((function(r){while(1)switch(r.prev=r.next){case 0:if(i=n.length>2&&void 0!==n[2]?n[2]:{},i){r.next=3;break}return r.abrupt("return",s().get(t,{headers:{Authorization:"Bearer "+e}}).then((function(e){return e})).catch((function(e){return e})));case 3:return a=(0,o.Z)((0,o.Z)({},i),{},{Authorization:"Bearer "+e}),r.abrupt("return",s().get(t,{headers:a}).then((function(e){return e})).catch((function(e){return e})));case 5:case"end":return r.stop()}}),r)})))()},otherAxiosToken:function(e,t,n,r){return(0,i.Z)(regeneratorRuntime.mark((function o(){var i;return regeneratorRuntime.wrap((function(o){while(1)switch(o.prev=o.next){case 0:if(o.prev=0,"post"!=r){o.next=7;break}return o.next=4,s().post(t,n,{headers:{Authorization:"Bearer "+e}});case 4:o.t0=o.sent,o.next=10;break;case 7:return o.next=9,s().put(t,n,{headers:{Authorization:"Bearer "+e}});case 9:o.t0=o.sent;case 10:return i=o.t0,o.abrupt("return",i);case 14:return o.prev=14,o.t1=o["catch"](0),o.abrupt("return",o.t1);case 17:case"end":return o.stop()}}),o,null,[[0,14]])})))()},getClientToken:function(){return this.decodeToken(sessionStorage.getItem("token"))},decodeToken:function(e){return(0,u.Z)(e)},createLocalUserData:function(){var e=this.getClientToken().client;localStorage.setItem("id",e.id),localStorage.setItem("user",e.name),localStorage.setItem("roles",e.roles),localStorage.setItem("email",e.email)},destroyLocalUserData:function(){localStorage.clear()},validateRole:function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];if(!this.isClientLogged())return this.destroyLocalUserData(),!1;var n=localStorage.getItem("roles");if(!t&&n.includes("ROLE_SuperAdmin"))return!0;if(void 0!=e){var o,i=(0,r.Z)(e);try{for(i.s();!(o=i.n()).done;){var a=o.value;if(n.includes(a))return!0}}catch(s){i.e(s)}finally{i.f()}}return!1},encryptPass:function(e){this.getClientToken();var t=sessionStorage.getItem("token").slice(-10),n=null,r=l().lib.WordArray.random(16);return t&&(n=l().AES.encrypt(e,t,r)),n.toString()}},m=g},7038:function(e){"use strict";e.exports="data:image/png;base64,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"},2480:function(){}},t={};function n(r){var o=t[r];if(void 0!==o)return o.exports;var i=t[r]={id:r,loaded:!1,exports:{}};return e[r].call(i.exports,i,i.exports,n),i.loaded=!0,i.exports}n.m=e,function(){var e=[];n.O=function(t,r,o,i){if(!r){var a=1/0;for(l=0;l<e.length;l++){r=e[l][0],o=e[l][1],i=e[l][2];for(var s=!0,u=0;u<r.length;u++)(!1&i||a>=i)&&Object.keys(n.O).every((function(e){return n.O[e](r[u])}))?r.splice(u--,1):(s=!1,i<a&&(a=i));if(s){e.splice(l--,1);var c=o();void 0!==c&&(t=c)}}return t}i=i||0;for(var l=e.length;l>0&&e[l-1][2]>i;l--)e[l]=e[l-1];e[l]=[r,o,i]}}(),function(){n.n=function(e){var t=e&&e.__esModule?function(){return e["default"]}:function(){return e};return n.d(t,{a:t}),t}}(),function(){n.d=function(e,t){for(var r in t)n.o(t,r)&&!n.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})}}(),function(){n.f={},n.e=function(e){return Promise.all(Object.keys(n.f).reduce((function(t,r){return n.f[r](e,t),t}),[]))}}(),function(){n.u=function(e){return"js/"+e+"-legacy."+{119:"9249b586",154:"59ed5fec",481:"4faa786f",961:"89b607bf"}[e]+".js"}}(),function(){n.miniCssF=function(e){return"css/"+e+"."+{154:"de09da26",481:"7df91c2f",961:"591a20cd"}[e]+".css"}}(),function(){n.g=function(){if("object"===typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"===typeof window)return window}}()}(),function(){n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)}}(),function(){var e={},t="iristravel:";n.l=function(r,o,i,a){if(e[r])e[r].push(o);else{var s,u;if(void 0!==i)for(var c=document.getElementsByTagName("script"),l=0;l<c.length;l++){var h=c[l];if(h.getAttribute("src")==r||h.getAttribute("data-webpack")==t+i){s=h;break}}s||(u=!0,s=document.createElement("script"),s.charset="utf-8",s.timeout=120,n.nc&&s.setAttribute("nonce",n.nc),s.setAttribute("data-webpack",t+i),s.src=r),e[r]=[o];var d=function(t,n){s.onerror=s.onload=null,clearTimeout(f);var o=e[r];if(delete e[r],s.parentNode&&s.parentNode.removeChild(s),o&&o.forEach((function(e){return e(n)})),t)return t(n)},f=setTimeout(d.bind(null,void 0,{type:"timeout",target:s}),12e4);s.onerror=d.bind(null,s.onerror),s.onload=d.bind(null,s.onload),u&&document.head.appendChild(s)}}}(),function(){n.r=function(e){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}}(),function(){n.nmd=function(e){return e.paths=[],e.children||(e.children=[]),e}}(),function(){n.p="/"}(),function(){var e=function(e,t,n,r){var o=document.createElement("link");o.rel="stylesheet",o.type="text/css";var i=function(i){if(o.onerror=o.onload=null,"load"===i.type)n();else{var a=i&&("load"===i.type?"missing":i.type),s=i&&i.target&&i.target.href||t,u=new Error("Loading CSS chunk "+e+" failed.\n("+s+")");u.code="CSS_CHUNK_LOAD_FAILED",u.type=a,u.request=s,o.parentNode.removeChild(o),r(u)}};return o.onerror=o.onload=i,o.href=t,document.head.appendChild(o),o},t=function(e,t){for(var n=document.getElementsByTagName("link"),r=0;r<n.length;r++){var o=n[r],i=o.getAttribute("data-href")||o.getAttribute("href");if("stylesheet"===o.rel&&(i===e||i===t))return o}var a=document.getElementsByTagName("style");for(r=0;r<a.length;r++){o=a[r],i=o.getAttribute("data-href");if(i===e||i===t)return o}},r=function(r){return new Promise((function(o,i){var a=n.miniCssF(r),s=n.p+a;if(t(a,s))return o();e(r,s,o,i)}))},o={143:0};n.f.miniCss=function(e,t){var n={154:1,481:1,961:1};o[e]?t.push(o[e]):0!==o[e]&&n[e]&&t.push(o[e]=r(e).then((function(){o[e]=0}),(function(t){throw delete o[e],t})))}}(),function(){var e={143:0};n.f.j=function(t,r){var o=n.o(e,t)?e[t]:void 0;if(0!==o)if(o)r.push(o[2]);else{var i=new Promise((function(n,r){o=e[t]=[n,r]}));r.push(o[2]=i);var a=n.p+n.u(t),s=new Error,u=function(r){if(n.o(e,t)&&(o=e[t],0!==o&&(e[t]=void 0),o)){var i=r&&("load"===r.type?"missing":r.type),a=r&&r.target&&r.target.src;s.message="Loading chunk "+t+" failed.\n("+i+": "+a+")",s.name="ChunkLoadError",s.type=i,s.request=a,o[1](s)}};n.l(a,u,"chunk-"+t,t)}},n.O.j=function(t){return 0===e[t]};var t=function(t,r){var o,i,a=r[0],s=r[1],u=r[2],c=0;if(a.some((function(t){return 0!==e[t]}))){for(o in s)n.o(s,o)&&(n.m[o]=s[o]);if(u)var l=u(n)}for(t&&t(r);c<a.length;c++)i=a[c],n.o(e,i)&&e[i]&&e[i][0](),e[i]=0;return n.O(l)},r=self["webpackChunkiristravel"]=self["webpackChunkiristravel"]||[];r.forEach(t.bind(null,0)),r.push=t.bind(null,r.push.bind(r))}();var r=n.O(void 0,[998],(function(){return n(5024)}));r=n.O(r)})();
-//# sourceMappingURL=app-legacy.5712ff26.js.map
+# braces [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W8YFZ425KND68) [![NPM version](https://img.shields.io/npm/v/braces.svg?style=flat)](https://www.npmjs.com/package/braces) [![NPM monthly downloads](https://img.shields.io/npm/dm/braces.svg?style=flat)](https://npmjs.org/package/braces) [![NPM total downloads](https://img.shields.io/npm/dt/braces.svg?style=flat)](https://npmjs.org/package/braces) [![Linux Build Status](https://img.shields.io/travis/micromatch/braces.svg?style=flat&label=Travis)](https://travis-ci.org/micromatch/braces)
+
+> Bash-like brace expansion, implemented in JavaScript. Safer than other brace expansion libs, with complete support for the Bash 4.3 braces specification, without sacrificing speed.
+
+Please consider following this project's author, [Jon Schlinkert](https://github.com/jonschlinkert), and consider starring the project to show your :heart: and support.
+
+## Install
+
+Install with [npm](https://www.npmjs.com/):
+
+```sh
+$ npm install --save braces
+```
+
+## v3.0.0 Released!!
+
+See the [changelog](CHANGELOG.md) for details.
+
+## Why use braces?
+
+Brace patterns make globs more powerful by adding the ability to match specific ranges and sequences of characters.
+
+* **Accurate** - complete support for the [Bash 4.3 Brace Expansion](www.gnu.org/software/bash/) specification (passes all of the Bash braces tests)
+* **[fast and performant](#benchmarks)** - Starts fast, runs fast and [scales well](#performance) as patterns increase in complexity.
+* **Organized code base** - The parser and compiler are easy to maintain and update when edge cases crop up.
+* **Well-tested** - Thousands of test assertions, and passes all of the Bash, minimatch, and [brace-expansion](https://github.com/juliangruber/brace-expansion) unit tests (as of the date this was written).
+* **Safer** - You shouldn't have to worry about users defining aggressive or malicious brace patterns that can break your application. Braces takes measures to prevent malicious regex that can be used for DDoS attacks (see [catastrophic backtracking](https://www.regular-expressions.info/catastrophic.html)).
+* [Supports lists](#lists) - (aka "sets") `a/{b,c}/d` => `['a/b/d', 'a/c/d']`
+* [Supports sequences](#sequences) - (aka "ranges") `{01..03}` => `['01', '02', '03']`
+* [Supports steps](#steps) - (aka "increments") `{2..10..2}` => `['2', '4', '6', '8', '10']`
+* [Supports escaping](#escaping) - To prevent evaluation of special characters.
+
+## Usage
+
+The main export is a function that takes one or more brace `patterns` and `options`.
+
+```js
+const braces = require('braces');
+// braces(patterns[, options]);
+
+console.log(braces(['{01..05}', '{a..e}']));
+//=> ['(0[1-5])', '([a-e])']
+
+console.log(braces(['{01..05}', '{a..e}'], { expand: true }));
+//=> ['01', '02', '03', '04', '05', 'a', 'b', 'c', 'd', 'e']
+```
+
+### Brace Expansion vs. Compilation
+
+By default, brace patterns are compiled into strings that are optimized for creating regular expressions and matching.
+
+**Compiled**
+
+```js
+console.log(braces('a/{x,y,z}/b')); 
+//=> ['a/(x|y|z)/b']
+console.log(braces(['a/{01..20}/b', 'a/{1..5}/b'])); 
+//=> [ 'a/(0[1-9]|1[0-9]|20)/b', 'a/([1-5])/b' ]
+```
+
+**Expanded**
+
+Enable brace expansion by setting the `expand` option to true, or by using [braces.expand()](#expand) (returns an array similar to what you'd expect from Bash, or `echo {1..5}`, or [minimatch](https://github.com/isaacs/minimatch)):
+
+```js
+console.log(braces('a/{x,y,z}/b', { expand: true }));
+//=> ['a/x/b', 'a/y/b', 'a/z/b']
+
+console.log(braces.expand('{01..10}'));
+//=> ['01','02','03','04','05','06','07','08','09','10']
+```
+
+### Lists
+
+Expand lists (like Bash "sets"):
+
+```js
+console.log(braces('a/{foo,bar,baz}/*.js'));
+//=> ['a/(foo|bar|baz)/*.js']
+
+console.log(braces.expand('a/{foo,bar,baz}/*.js'));
+//=> ['a/foo/*.js', 'a/bar/*.js', 'a/baz/*.js']
+```
+
+### Sequences
+
+Expand ranges of characters (like Bash "sequences"):
+
+```js
+console.log(braces.expand('{1..3}'));                // ['1', '2', '3']
+console.log(braces.expand('a/{1..3}/b'));            // ['a/1/b', 'a/2/b', 'a/3/b']
+console.log(braces('{a..c}', { expand: true }));     // ['a', 'b', 'c']
+console.log(braces('foo/{a..c}', { expand: true })); // ['foo/a', 'foo/b', 'foo/c']
+
+// supports zero-padded ranges
+console.log(braces('a/{01..03}/b'));   //=> ['a/(0[1-3])/b']
+console.log(braces('a/{001..300}/b')); //=> ['a/(0{2}[1-9]|0[1-9][0-9]|[12][0-9]{2}|300)/b']
+```
+
+See [fill-range](https://github.com/jonschlinkert/fill-range) for all available range-expansion options.
+
+### Steppped ranges
+
+Steps, or increments, may be used with ranges:
+
+```js
+console.log(braces.expand('{2..10..2}'));
+//=> ['2', '4', '6', '8', '10']
+
+console.log(braces('{2..10..2}'));
+//=> ['(2|4|6|8|10)']
+```
+
+When the [.optimize](#optimize) method is used, or [options.optimize](#optionsoptimize) is set to true, sequences are passed to [to-regex-range](https://github.com/jonschlinkert/to-regex-range) for expansion.
+
+### Nesting
+
+Brace patterns may be nested. The results of each expanded string are not sorted, and left to right order is preserved.
+
+**"Expanded" braces**
+
+```js
+console.log(braces.expand('a{b,c,/{x,y}}/e'));
+//=> ['ab/e', 'ac/e', 'a/x/e', 'a/y/e']
+
+console.log(braces.expand('a/{x,{1..5},y}/c'));
+//=> ['a/x/c', 'a/1/c', 'a/2/c', 'a/3/c', 'a/4/c', 'a/5/c', 'a/y/c']
+```
+
+**"Optimized" braces**
+
+```js
+console.log(braces('a{b,c,/{x,y}}/e'));
+//=> ['a(b|c|/(x|y))/e']
+
+console.log(braces('a/{x,{1..5},y}/c'));
+//=> ['a/(x|([1-5])|y)/c']
+```
+
+### Escaping
+
+**Escaping braces**
+
+A brace pattern will not be expanded or evaluted if _either the opening or closing brace is escaped_:
+
+```js
+console.log(braces.expand('a\\{d,c,b}e'));
+//=> ['a{d,c,b}e']
+
+console.log(braces.expand('a{d,c,b\\}e'));
+//=> ['a{d,c,b}e']
+```
+
+**Escaping commas**
+
+Commas inside braces may also be escaped:
+
+```js
+console.log(braces.expand('a{b\\,c}d'));
+//=> ['a{b,c}d']
+
+console.log(braces.expand('a{d\\,c,b}e'));
+//=> ['ad,ce', 'abe']
+```
+
+**Single items**
+
+Following bash conventions, a brace pattern is also not expanded when it contains a single character:
+
+```js
+console.log(braces.expand('a{b}c'));
+//=> ['a{b}c']
+```
+
+## Options
+
+### options.maxLength
+
+**Type**: `Number`
+
+**Default**: `65,536`
+
+**Description**: Limit the length of the input string. Useful when the input string is generated or your application allows users to pass a string, et cetera.
+
+```js
+console.log(braces('a/{b,c}/d', { maxLength: 3 }));  //=> throws an error
+```
+
+### options.expand
+
+**Type**: `Boolean`
+
+**Default**: `undefined`
+
+**Description**: Generate an "expanded" brace pattern (alternatively you can use the `braces.expand()` method, which does the same thing).
+
+```js
+console.log(braces('a/{b,c}/d', { expand: true }));
+//=> [ 'a/b/d', 'a/c/d' ]
+```
+
+### options.nodupes
+
+**Type**: `Boolean`
+
+**Default**: `undefined`
+
+**Description**: Remove duplicates from the returned array.
+
+### options.rangeLimit
+
+**Type**: `Number`
+
+**Default**: `1000`
+
+**Description**: To prevent malicious patterns from being passed by users, an error is thrown when `braces.expand()` is used or `options.expand` is true and the generated range will exceed the `rangeLimit`.
+
+You can customize `options.rangeLimit` or set it to `Inifinity` to disable this altogether.
+
+**Examples**
+
+```js
+// pattern exceeds the "rangeLimit", so it's optimized automatically
+console.log(braces.expand('{1..1000}'));
+//=> ['([1-9]|[1-9][0-9]{1,2}|1000)']
+
+// pattern does not exceed "rangeLimit", so it's NOT optimized
+console.log(braces.expand('{1..100}'));
+//=> ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', '100']
+```
+
+### options.transform
+
+**Type**: `Function`
+
+**Default**: `undefined`
+
+**Description**: Customize range expansion.
+
+**Example: Transforming non-numeric values**
+
+```js
+const alpha = braces.expand('x/{a..e}/y', {
+  transform(value, index) {
+    // When non-numeric values are passed, "value" is a character code.
+    return 'foo/' + String.fromCharCode(value) + '-' + index;
+  }
+});
+console.log(alpha);
+//=> [ 'x/foo/a-0/y', 'x/foo/b-1/y', 'x/foo/c-2/y', 'x/foo/d-3/y', 'x/foo/e-4/y' ]
+```
+
+**Example: Transforming numeric values**
+
+```js
+const numeric = braces.expand('{1..5}', {
+  transform(value) {
+    // when numeric values are passed, "value" is a number
+    return 'foo/' + value * 2;
+  }
+});
+console.log(numeric); 
+//=> [ 'foo/2', 'foo/4', 'foo/6', 'foo/8', 'foo/10' ]
+```
+
+### options.quantifiers
+
+**Type**: `Boolean`
+
+**Default**: `undefined`
+
+**Description**: In regular expressions, quanitifiers can be used to specify how many times a token can be repeated. For example, `a{1,3}` will match the letter `a` one to three times.
+
+Unfortunately, regex quantifiers happen to share the same syntax as [Bash lists](#lists)
+
+The `quantifiers` option tells braces to detect when [regex quantifiers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#quantifiers) are defined in the given pattern, and not to try to expand them as lists.
+
+**Examples**
+
+```js
+const braces = require('braces');
+console.log(braces('a/b{1,3}/{x,y,z}'));
+//=> [ 'a/b(1|3)/(x|y|z)' ]
+console.log(braces('a/b{1,3}/{x,y,z}', {quantifiers: true}));
+//=> [ 'a/b{1,3}/(x|y|z)' ]
+console.log(braces('a/b{1,3}/{x,y,z}', {quantifiers: true, expand: true}));
+//=> [ 'a/b{1,3}/x', 'a/b{1,3}/y', 'a/b{1,3}/z' ]
+```
+
+### options.unescape
+
+**Type**: `Boolean`
+
+**Default**: `undefined`
+
+**Description**: Strip backslashes that were used for escaping from the result.
+
+## What is "brace expansion"?
+
+Brace expansion is a type of parameter expansion that was made popular by unix shells for generating lists of strings, as well as regex-like matching when used alongside wildcards (globs).
+
+In addition to "expansion", braces are also used for matching. In other words:
+
+* [brace expansion](#brace-expansion) is for generating new lists
+* [brace matching](#brace-matching) is for filtering existing lists
+
+<details>
+<summary><strong>More about brace expansion</strong> (click to expand)</summary>
+
+There are two main types of brace expansion:
+
+1. **lists**: which are defined using comma-separated values inside curly braces: `{a,b,c}`
+2. **sequences**: which are defined using a starting value and an ending value, separated by two dots: `a{1..3}b`. Optionally, a third argument may be passed to define a "step" or increment to use: `a{1..100..10}b`. These are also sometimes referred to as "ranges".
+
+Here are some example brace patterns to illustrate how they work:
+
+**Sets**
+
+```
+{a,b,c}       => a b c
+{a,b,c}{1,2}  => a1 a2 b1 b2 c1 c2
+```
+
+**Sequences**
+
+```
+{1..9}        => 1 2 3 4 5 6 7 8 9
+{4..-4}       => 4 3 2 1 0 -1 -2 -3 -4
+{1..20..3}    => 1 4 7 10 13 16 19
+{a..j}        => a b c d e f g h i j
+{j..a}        => j i h g f e d c b a
+{a..z..3}     => a d g j m p s v y
+```
+
+**Combination**
+
+Sets and sequences can be mixed together or used along with any other strings.
+
+```
+{a,b,c}{1..3}   => a1 a2 a3 b1 b2 b3 c1 c2 c3
+foo/{a,b,c}/bar => foo/a/bar foo/b/bar foo/c/bar
+```
+
+The fact that braces can be "expanded" from relatively simple patterns makes them ideal for quickly generating test fixtures, file paths, and similar use cases.
+
+## Brace matching
+
+In addition to _expansion_, brace patterns are also useful for performing regular-expression-like matching.
+
+For example, the pattern `foo/{1..3}/bar` would match any of following strings:
+
+```
+foo/1/bar
+foo/2/bar
+foo/3/bar
+```
+
+But not:
+
+```
+baz/1/qux
+baz/2/qux
+baz/3/qux
+```
+
+Braces can also be combined with [glob patterns](https://github.com/jonschlinkert/micromatch) to perform more advanced wildcard matching. For example, the pattern `*/{1..3}/*` would match any of following strings:
+
+```
+foo/1/bar
+foo/2/bar
+foo/3/bar
+baz/1/qux
+baz/2/qux
+baz/3/qux
+```
+
+## Brace matching pitfalls
+
+Although brace patterns offer a user-friendly way of matching ranges or sets of strings, there are also some major disadvantages and potential risks you should be aware of.
+
+### tldr
+
+**"brace bombs"**
+
+* brace expansion can eat up a huge amount of processing resources
+* as brace patterns increase _linearly in size_, the system resources required to expand the pattern increase exponentially
+* users can accidentally (or intentially) exhaust your system's resources resulting in the equivalent of a DoS attack (bonus: no programming knowledge is required!)
+
+For a more detailed explanation with examples, see the [geometric complexity](#geometric-complexity) section.
+
+### The solution
+
+Jump to the [performance section](#performance) to see how Braces solves this problem in comparison to other libraries.
+
+### Geometric complexity
+
+At minimum, brace patterns with sets limited to two elements have quadradic or `O(n^2)` complexity. But the complexity of the algorithm increases exponentially as the number of sets, _and elements per set_, increases, which is `O(n^c)`.
+
+For example, the following sets demonstrate quadratic (`O(n^2)`) complexity:
+
+```
+{1,2}{3,4}      => (2X2)    => 13 14 23 24
+{1,2}{3,4}{5,6} => (2X2X2)  => 135 136 145 146 235 236 245 246
+```
+
+But add an element to a set, and we get a n-fold Cartesian product with `O(n^c)` complexity:
+
+```
+{1,2,3}{4,5,6}{7,8,9} => (3X3X3) => 147 148 149 157 158 159 167 168 169 247 248 
+                                    249 257 258 259 267 268 269 347 348 349 357 
+                                    358 359 367 368 369
+```
+
+Now, imagine how this complexity grows given that each element is a n-tuple:
+
+```
+{1..100}{1..100}         => (100X100)     => 10,000 elements (38.4 kB)
+{1..100}{1..100}{1..100} => (100X100X100) => 1,000,000 elements (5.76 MB)
+```
+
+Although these examples are clearly contrived, they demonstrate how brace patterns can quickly grow out of control.
+
+**More information**
+
+Interested in learning more about brace expansion?
+
+* [linuxjournal/bash-brace-expansion](http://www.linuxjournal.com/content/bash-brace-expansion)
+* [rosettacode/Brace_expansion](https://rosettacode.org/wiki/Brace_expansion)
+* [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product)
+
+</details>
+
+## Performance
+
+Braces is not only screaming fast, it's also more accurate the other brace expansion libraries.
+
+### Better algorithms
+
+Fortunately there is a solution to the ["brace bomb" problem](#brace-matching-pitfalls): _don't expand brace patterns into an array when they're used for matching_.
+
+Instead, convert the pattern into an optimized regular expression. This is easier said than done, and braces is the only library that does this currently.
+
+**The proof is in the numbers**
+
+Minimatch gets exponentially slower as patterns increase in complexity, braces does not. The following results were generated using `braces()` and `minimatch.braceExpand()`, respectively.
+
+| **Pattern**                 | **braces**         | **[minimatch][]**            |
+| ---                         | ---                | ---                          |
+| `{1..9007199254740991}`[^1] | `298 B` (5ms 459μs)|  N/A (freezes)               |
+| `{1..1000000000000000}`     | `41 B` (1ms 15μs)  |  N/A (freezes)               |
+| `{1..100000000000000}`      | `40 B` (890μs)     |  N/A (freezes)               |
+| `{1..10000000000000}`       | `39 B` (2ms 49μs)  |  N/A (freezes)               |
+| `{1..1000000000000}`        | `38 B` (608μs)     |  N/A (freezes)               |
+| `{1..100000000000}`         | `37 B` (397μs)     |  N/A (freezes)               |
+| `{1..10000000000}`          | `35 B` (983μs)     |  N/A (freezes)               |
+| `{1..1000000000}`           | `34 B` (798μs)     |  N/A (freezes)               |
+| `{1..100000000}`            | `33 B` (733μs)     |  N/A (freezes)               |
+| `{1..10000000}`             | `32 B` (5ms 632μs) | `78.89 MB` (16s 388ms 569μs) |
+| `{1..1000000}`              | `31 B` (1ms 381μs) | `6.89 MB` (1s 496ms 887μs)   |
+| `{1..100000}`               | `30 B` (950μs)     | `588.89 kB` (146ms 921μs)    |
+| `{1..10000}`                | `29 B` (1ms 114μs) | `48.89 kB` (14ms 187μs)      |
+| `{1..1000}`                 | `28 B` (760μs)     | `3.89 kB` (1ms 453μs)        |
+| `{1..100}`                  | `22 B` (345μs)     | `291 B` (196μs)              |
+| `{1..10}`                   | `10 B` (533μs)     | `20 B` (37μs)                |
+| `{1..3}`                    | `7 B` (190μs)      | `5 B` (27μs)                 |
+
+### Faster algorithms
+
+When you need expansion, braces is still much faster.
+
+_(the following results were generated using `braces.expand()` and `minimatch.braceExpand()`, respectively)_
+
+| **Pattern**     | **braces**                  | **[minimatch][]**            |
+| ---             | ---                         | ---                          |
+| `{1..10000000}` | `78.89 MB` (2s 698ms 642μs) | `78.89 MB` (18s 601ms 974μs) |
+| `{1..1000000}`  | `6.89 MB` (458ms 576μs)     | `6.89 MB` (1s 491ms 621μs)   |
+| `{1..100000}`   | `588.89 kB` (20ms 728μs)    | `588.89 kB` (156ms 919μs)    |
+| `{1..10000}`    | `48.89 kB` (2ms 202μs)      | `48.89 kB` (13ms 641μs)      |
+| `{1..1000}`     | `3.89 kB` (1ms 796μs)       | `3.89 kB` (1ms 958μs)        |
+| `{1..100}`      | `291 B` (424μs)             | `291 B` (211μs)              |
+| `{1..10}`       | `20 B` (487μs)              | `20 B` (72μs)                |
+| `{1..3}`        | `5 B` (166μs)               | `5 B` (27μs)                 |
+
+If you'd like to run these comparisons yourself, see [test/support/generate.js](test/support/generate.js).
+
+## Benchmarks
+
+### Running benchmarks
+
+Install dev dependencies:
+
+```bash
+npm i -d && npm benchmark
+```
+
+### Latest results
+
+Braces is more accurate, without sacrificing performance.
+
+```bash
+# range (expanded)
+  braces x 29,040 ops/sec ±3.69% (91 runs sampled))
+  minimatch x 4,735 ops/sec ±1.28% (90 runs sampled)
+
+# range (optimized for regex)
+  braces x 382,878 ops/sec ±0.56% (94 runs sampled)
+  minimatch x 1,040 ops/sec ±0.44% (93 runs sampled)
+
+# nested ranges (expanded)
+  braces x 19,744 ops/sec ±2.27% (92 runs sampled))
+  minimatch x 4,579 ops/sec ±0.50% (93 runs sampled)
+
+# nested ranges (optimized for regex)
+  braces x 246,019 ops/sec ±2.02% (93 runs sampled)
+  minimatch x 1,028 ops/sec ±0.39% (94 runs sampled)
+
+# set (expanded) 
+  braces x 138,641 ops/sec ±0.53% (95 runs sampled)
+  minimatch x 219,582 ops/sec ±0.98% (94 runs sampled)
+
+# set (optimized for regex)
+  braces x 388,408 ops/sec ±0.41% (95 runs sampled)
+  minimatch x 44,724 ops/sec ±0.91% (89 runs sampled)
+
+# nested sets (expanded)
+  braces x 84,966 ops/sec ±0.48% (94 runs sampled)
+  minimatch x 140,720 ops/sec ±0.37% (95 runs sampled)
+
+# nested sets (optimized for regex)
+  braces x 263,340 ops/sec ±2.06% (92 runs sampled)
+  minimatch x 28,714 ops/sec ±0.40% (90 runs sampled)
+```
+
+## About
+
+<details>
+<summary><strong>Contributing</strong></summary>
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
+
+</details>
+
+<details>
+<summary><strong>Running Tests</strong></summary>
+
+Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
+
+```sh
+$ npm install && npm test
+```
+
+</details>
+
+<details>
+<summary><strong>Building docs</strong></summary>
+
+_(This project's readme.md is generated by [verb](https://github.com/verbose/verb-generate-readme), please don't edit the readme directly. Any changes to the readme must be made in the [.verb.md](.verb.md) readme template.)_
+
+To generate the readme, run the following command:
+
+```sh
+$ npm install -g verbose/verb#dev verb-generate-readme && verb
+```
+
+</details>
+
+### Contributors
+
+| **Commits** | **Contributor** |  
+| --- | --- |  
+| 197 | [jonschlinkert](https://github.com/jonschlinkert) |  
+| 4   | [doowb](https://github.com/doowb) |  
+| 1   | [es128](https://github.com/es128) |  
+| 1   | [eush77](https://github.com/eush77) |  
+| 1   | [hemanth](https://github.com/hemanth) |  
+| 1   | [wtgtybhertgeghgtwtg](https://github.com/wtgtybhertgeghgtwtg) |  
+
+### Author
+
+**Jon Schlinkert**
+
+* [GitHub Profile](https://github.com/jonschlinkert)
+* [Twitter Profile](https://twitter.com/jonschlinkert)
+* [LinkedIn Profile](https://linkedin.com/in/jonschlinkert)
+
+### License
+
+Copyright © 2019, [Jon Schlinkert](https://github.com/jonschlinkert).
+Released under the [MIT License](LICENSE).
+
+***
+
